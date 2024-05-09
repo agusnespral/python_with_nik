@@ -1,5 +1,7 @@
 from math import *
 
+#calculador que suma, resta, divide o multiplica dos numeros enteros
+
 again = 'y'
 while again == 'y':
 
