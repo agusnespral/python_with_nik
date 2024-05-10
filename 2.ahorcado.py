@@ -16,12 +16,16 @@ def mensajePrimerIntento():
     print("Attempts left: ", attempts_count)
     esPrimerIntento = False
 
+def adivinacion():
+    global guessed, attempts
+    print("CONGRATULATIONS, YOU are the MESSI of the ahorcados! You win the game in", attempts, "attempt/s.\n ")
+    opcionReplay()
+    guessed = True
+
 def arriesgaPalabra():
     global guessed, chosen_word, chance, attempts, attempts_count
     if chance == chosen_word:
-        print("CONGRATULATIONS, YOU are the MESSI of the ahorcados! You win the game in", attempts, "attempt/s.\n ")
-        opcionReplay()
-        guessed = True
+        adivinacion()
     else:
         print("Bad call! The guessed word is not the secret one. You still have", attempts_count, "attempts.")
 
@@ -34,6 +38,10 @@ def arriesgaLetra():
             bar_word = bar_word[:pos] + i + bar_word[pos + 1:]
             printing = True
         pos += 1
+    
+    if chosen_word == bar_word:
+        adivinacion()
+        return
 
     if not printing:
         if attempts_count > 0:
@@ -59,7 +67,7 @@ def despedida():
 
 def play():
 
-    global words, chosen_word, attempts_count, bar_word, chance
+    global words, chosen_word, attempts_count, bar_word, chance, attempts
 
     attempts = 0
     random_num = (random.randint(0, 9))
