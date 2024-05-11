@@ -12,9 +12,10 @@ def formarBarWord():
 def mensajePrimerIntento():
     global bar_word, esPrimerIntento, attempts_count
     print("\nYour word is:")
-    print(bar_word, " || ", " 0 characters guessed over", len(bar_word))
+    print(bar_word, " || ", " Total characters:", len(bar_word))
     print("Attempts left: ", attempts_count)
     esPrimerIntento = False
+    return esPrimerIntento
 
 def adivinacion():
     global guessed, attempts
@@ -46,12 +47,14 @@ def arriesgaLetra():
     if not printing:
         if attempts_count > 0:
             print("Bad call! The guessed letter is not part of the secret word.")
+            print("Attempts left: ", attempts_count)
         else:
             print("Bad call and thats all.")
             
     else:
         if attempts_count > 0:
             print("Nice, your letter is in the word!\n", bar_word, ".\n")
+            print("Attempts left: ", attempts_count)
         else:
             print("Your letter is in the word.")
 
@@ -63,11 +66,13 @@ def opcionReplay():
         despedida()
 
 def despedida():
+    global attempts, guessed
     print("\nSayonara!!!.\n")
-
+    attempts = 7
+    guessed = True
 def play():
 
-    global words, chosen_word, attempts_count, bar_word, chance, attempts
+    global words, chosen_word, attempts_count, bar_word, chance, attempts, esPrimerIntento, guessed
 
     attempts = 0
     random_num = (random.randint(0, 9))
@@ -82,6 +87,7 @@ def play():
     while attempts < 7 and not guessed:
 
         if esPrimerIntento:
+
             mensajePrimerIntento()
             
         chance = input("\nPlease, type a letter or an entire word: ")
